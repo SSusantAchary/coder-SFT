@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qwen35-coder-sft"
+version = "0.1.0"
+description = "Reproducible BF16 LoRA training pipeline for Qwen3.5-2B-Coder"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+dependencies = [
+  "datasets>=3.0",
+  "huggingface-hub>=0.28",
+  "numpy>=1.26",
+  "pyyaml>=6.0",
+  "tqdm>=4.66",
+]
+
+[project.optional-dependencies]
+train = [
+  "accelerate>=1.2",
+  "bitsandbytes>=0.45",
+  "peft>=0.14",
+  "tensorboard>=2.18",
+  "transformers==5.2.0",
+  "trl==0.22.2",
+  "wandb>=0.19",
+]
+eval = ["evalplus==0.3.1"]
+test = ["pytest>=8.3"]
+
+[project.scripts]
+prepare-data = "coder_sft.prepare:main"
+build-repo-context = "coder_sft.repo_context:main"
+profile-memory = "coder_sft.memory_profile:main"
+train-sft = "coder_sft.training:main"
+generate-eval = "coder_sft.evaluation:generate_main"
+compare-runs = "coder_sft.evaluation:compare_main"
+export-model = "coder_sft.export:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

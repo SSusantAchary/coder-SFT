@@ -1,0 +1,36 @@
+model_name: unsloth/Qwen3.5-2B
+seed: 3407
+
+model:
+  name: unsloth/Qwen3.5-2B
+  load_in_4bit: false
+  load_in_16bit: true
+
+lora:
+  rank: 32
+  alpha: 32
+  dropout: 0.0
+  use_rslora: false
+  target_modules:
+    - q_proj
+    - k_proj
+    - v_proj
+    - o_proj
+    - in_proj_qkv
+    - in_proj_z
+    - in_proj_b
+    - in_proj_a
+    - out_proj
+    - gate_proj
+    - up_proj
+    - down_proj
+
+training_data:
+  stage1_path: ${CODER_SFT_WORKDIR}/data/stage1_v1.jsonl
+  repo_path: ${CODER_SFT_WORKDIR}/data/repo_v1.jsonl
+  stage2_rehearsal_count: 556
+
+evaluation:
+  max_length: 8192
+  temp_dir: ${CODER_SFT_WORKDIR}/tmp/eval
+

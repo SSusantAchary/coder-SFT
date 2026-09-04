@@ -1,0 +1,23 @@
+training:
+  max_length: 32768
+  minimum_length: 16384
+  output_dir: ${CODER_SFT_WORKDIR}/outputs/q35-2b-coder-s2-repo
+  memory_report: ${CODER_SFT_WORKDIR}/reports/memory_profile.json
+  require_memory_report: true
+  stage1_gate_report: ${CODER_SFT_WORKDIR}/reports/stage1_gate.json
+  require_stage1_gate: true
+  num_train_epochs: 1
+  learning_rate: 0.0001
+  warmup_ratio: 0.03
+  weight_decay: 0.01
+  packing: false
+  logging_steps: 5
+  save_steps: 100
+  eval_steps: 100
+  save_total_limit: 3
+  dataset_num_proc: 2
+  report_to: [tensorboard]
+  enable_wandb: true
+  run_name: q35-2b-coder-s2-repo
+  bf16: true
+  hub_model_id: null

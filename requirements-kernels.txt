@@ -1,0 +1,3 @@
+# These packages must be installed separately with --no-build-isolation.
+flash-linear-attention
+causal-conv1d==1.6.0

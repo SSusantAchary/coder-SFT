@@ -1,0 +1,4 @@
+# Official Qwen3.5 notebook additions for compute capability >= 8 (A100/H100).
+apache-tvm-ffi==0.1.9
+tilelang==0.1.8
+torchao>=0.16.0

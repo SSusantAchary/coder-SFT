@@ -1,0 +1,18 @@
+training:
+  max_length: 8192
+  output_dir: ${CODER_SFT_WORKDIR}/outputs/q35-2b-coder-s1-8k
+  num_train_epochs: 1
+  learning_rate: 0.0001
+  warmup_ratio: 0.03
+  weight_decay: 0.01
+  packing: true
+  logging_steps: 10
+  save_steps: 250
+  eval_steps: 250
+  save_total_limit: 3
+  dataset_num_proc: 2
+  report_to: [tensorboard]
+  enable_wandb: true
+  run_name: q35-2b-coder-s1-8k
+  bf16: true
+  hub_model_id: null

@@ -1,0 +1,52 @@
+seed: 3407
+model_name: unsloth/Qwen3.5-2B
+
+data:
+  stage1_output: ${CODER_SFT_WORKDIR}/data/stage1_v1.jsonl
+  max_tokens: 8192
+  candidate_multiplier: 1.5
+  smoke_scan_limit: 5000
+  dedup_threshold: 0.85
+  datasets:
+    refined: EER6/nvidia-OpenCodeInstruct-refined
+    broad: EER6/nvidia-OpenCodeInstruct-broad
+  counts:
+    refined: 35000
+    broad: 15000
+    commitpack: 10000
+  broad_tier_weights:
+    A: 0.50
+    B: 0.30
+    C: 0.15
+    D: 0.05
+  language_weights:
+    python: 0.35
+    javascript: 0.15
+    typescript: 0.15
+    java: 0.10
+    cpp: 0.10
+    go: 0.08
+    rust: 0.05
+    shell: 0.01
+    sql: 0.01
+
+repo_data:
+  output: ${CODER_SFT_WORKDIR}/data/repo_v1.jsonl
+  cache_dir: ${CODER_SFT_WORKDIR}/cache/repositories
+  train_count: 5000
+  validation_count: 100
+  test_count: 100
+  candidate_multiplier: 3
+  max_file_bytes: 100000
+  max_skip_details: 1000
+  language_weights:
+    python: 0.35
+    javascript: 0.15
+    typescript: 0.15
+    java: 0.10
+    cpp: 0.10
+    go: 0.08
+    rust: 0.07
+
+evaluation:
+  temp_dir: ${CODER_SFT_WORKDIR}/tmp/eval

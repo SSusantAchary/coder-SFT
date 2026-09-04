@@ -1,0 +1,26 @@
+hardware_profiles:
+  a100_40gb:
+    min_vram_gb: 35
+    stages:
+      stage1:
+        per_device_train_batch_size: 1
+        gradient_accumulation_steps: 16
+      stage2:
+        per_device_train_batch_size: 1
+        gradient_accumulation_steps: 4
+  a100_80gb:
+    min_vram_gb: 70
+    stages:
+      stage1:
+        per_device_train_batch_size: 2
+        gradient_accumulation_steps: 8
+      stage2:
+        per_device_train_batch_size: 2
+        gradient_accumulation_steps: 2
+
+memory_profile:
+  lengths: [8192, 16384, 24576, 32768]
+  extended_lengths: [49152, 65536, 98304, 131072]
+  required_headroom: 0.10
+  output: ${CODER_SFT_WORKDIR}/reports/memory_profile.json
+
