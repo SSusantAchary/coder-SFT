@@ -291,9 +291,6 @@ def train(
     from unsloth.chat_templates import train_on_responses_only
 
     report_to = list(training.get("report_to", ["tensorboard"]))
-    if training.get("enable_wandb", True) and os.environ.get("WANDB_API_KEY"):
-        if "wandb" not in report_to:
-            report_to.append("wandb")
     args = SFTConfig(
         output_dir=str(output),
         dataset_text_field="text",
@@ -377,13 +374,6 @@ def train(
         metrics["eval_metrics"] = trainer.evaluate()
     write_json(metrics, output / "training_summary.json")
 
-    hub_id = training.get("hub_model_id")
-    if hub_id:
-        if not os.environ.get("HF_TOKEN"):
-            LOGGER.warning("hub_model_id is configured but HF_TOKEN is absent; skipping upload")
-        else:
-            model.push_to_hub(hub_id, token=os.environ["HF_TOKEN"])
-            tokenizer.push_to_hub(hub_id, token=os.environ["HF_TOKEN"])
     return metrics
 
 

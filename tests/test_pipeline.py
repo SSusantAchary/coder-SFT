@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 from coder_sft.evaluation import compare_reports
+from coder_sft.export import HUB_REPO_PATTERN, validate_final_adapter
 from coder_sft.modeling import (
     audit_native_context,
     audit_projection_modules,
@@ -79,6 +80,18 @@ class PipelineTests(unittest.TestCase):
             },
         }
         self.assertTrue(compare_reports(baseline, candidate, "stage1")["passed"])
+
+    def test_hub_publication_requires_stage2_lineage(self):
+        self.assertIsNotNone(HUB_REPO_PATTERN.fullmatch("owner/model-name"))
+        self.assertIsNone(HUB_REPO_PATTERN.fullmatch("missing-namespace"))
+        with tempfile.TemporaryDirectory() as directory:
+            adapter = Path(directory)
+            lineage = adapter / "training_lineage.json"
+            lineage.write_text('{"stage":"stage1"}', encoding="utf-8")
+            with self.assertRaises(RuntimeError):
+                validate_final_adapter(str(adapter))
+            lineage.write_text('{"stage":"stage2"}', encoding="utf-8")
+            self.assertEqual(validate_final_adapter(str(adapter))["stage"], "stage2")
 
     def test_projection_family_audit(self):
         class Model:

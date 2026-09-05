@@ -1111,7 +1111,7 @@ trainer = SFTTrainer(
         eval_steps=250,
         bf16=True,
         packing=True,
-        report_to="wandb",
+        report_to="tensorboard",
     ),
 )
 
@@ -1532,7 +1532,7 @@ These ablations tell us where the gains actually come from.
 
 # 31. Logging
 
-Use W&B, MLflow or equivalent.
+Use local TensorBoard logs during the Colab run. No W&B credential is required.
 
 Log:
 

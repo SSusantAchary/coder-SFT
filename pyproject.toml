@@ -24,7 +24,6 @@ train = [
   "tensorboard>=2.18",
   "transformers==5.2.0",
   "trl==0.22.2",
-  "wandb>=0.19",
 ]
 eval = ["evalplus==0.3.1"]
 test = ["pytest>=8.3"]
@@ -37,6 +36,7 @@ train-sft = "coder_sft.training:main"
 generate-eval = "coder_sft.evaluation:generate_main"
 compare-runs = "coder_sft.evaluation:compare_main"
 export-model = "coder_sft.export:main"
+sync-data = "coder_sft.data_sync:main"
 
 [tool.setuptools]
 package-dir = { "" = "src" }

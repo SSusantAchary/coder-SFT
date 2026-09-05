@@ -88,7 +88,6 @@ def package_versions() -> dict[str, str]:
         "tilelang",
         "torchao",
         "evalplus",
-        "wandb",
     ]
     versions = {}
     for package in packages:

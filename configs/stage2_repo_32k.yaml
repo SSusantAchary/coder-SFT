@@ -17,7 +17,5 @@ training:
   save_total_limit: 3
   dataset_num_proc: 2
   report_to: [tensorboard]
-  enable_wandb: true
   run_name: q35-2b-coder-s2-repo
   bf16: true
-  hub_model_id: null

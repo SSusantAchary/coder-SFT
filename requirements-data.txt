@@ -1,0 +1,8 @@
+# CPU-only dependencies for data preparation and HF Dataset Hub handoff.
+transformers==5.2.0
+tokenizers>=0.22.0,<=0.23.0
+datasets>=3.0.0
+huggingface-hub>=0.28.0
+pyyaml>=6.0
+tqdm>=4.66
+evalplus==0.3.1
